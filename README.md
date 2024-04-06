@@ -35,6 +35,7 @@ In a modern fashion, a statistical analysis will then partially cover the fallac
 
 ## Statistical analysis
 The sample dataset `bench.txt` shows such features:
+![plot](./assets/bench.png)
 
  * most of the measurements reflect the actual kernel time
  * spikes signal the intervention of the operating system, therefore the measure is not significant for the benchmark
