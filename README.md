@@ -30,4 +30,22 @@ for (int i = 0; i < SAMPLES; ++i) {
 Pseudocode of a possible implementation, the solution is intended to be copy pasted and modified at hand.
 In my previous experiments I used google benchmark, which is a fantastic tool for the job and also covers the tricky microbenchmarks, my solution strips all the features to make benchmarking as simple and portable as possible (better something than nothing at all)
 
-In a modern fashion, a statistical analysis will then partially cover the fallacies of the measurement method (problems 1, 2 and 3)
+In a modern fashion, a statistical analysis will then partially cover the fallacies of the measurement method. It also helps if the tests are run on a machine with few and light processes, in the ideal world the target program would be the ONLY program running on the machine, see experiments like [tetris OS](https://github.com/lucianoforks/tetris-os)
+
+
+## Statistical analysis
+The sample dataset `bench.txt` shows such features:
+
+ * most of the measurements reflect the actual kernel time
+ * spikes signal the intervention of the operating system, therefore the measure is not significant for the benchmark
+ * there is variability in adjacent measures (see zoomed plot)
+
+The first solution that comes to mind is computing the following statistics:
+ * *mean*: affected by the concurrent processes, but the majority of samples are "true"
+ * *median*: stable to outliers, provides an accurate information about the kernel
+ * *minimum*: the best performance
+ * *variance*: still don't know its purpuose in the experiment
+
+Given two benchmark datasets, those number will be sufficient to decide whether an optimization is improving the execution speed. I'm sure there are better statistical methods, open a pull request if you have a good idea! Here is a list of interesting research questions:
+ * find if performance is slowly degrading (it means that the kernel times are growing over the number of samples)
+ * given a dataset, find the optimal number of samples to take without compromizing the statistical properties of the data (benchmarks are expensive, the dataset `bench.txt` took 7 hours to make)
