@@ -3,7 +3,7 @@ import sys
 
 
 def parse_file(filename):
-    with open(sys.argv[1], 'r') as f:
+    with open(filename, 'r') as f:
         title = f.readline()
         data  = np.array([float(line) for line in f.readlines()])
 
