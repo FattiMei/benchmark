@@ -50,3 +50,21 @@ The first solution that comes to mind is computing the following statistics:
 Given two benchmark datasets, those number will be sufficient to decide whether an optimization is improving the execution speed. I'm sure there are better statistical methods, open a pull request if you have a good idea! Here is a list of interesting research questions:
  * find if performance is slowly degrading (it means that the kernel times are growing over the number of samples)
  * given a dataset, find the optimal number of samples to take without compromizing the statistical properties of the data (benchmarks are expensive, the dataset `bench.txt` took 7 hours to make)
+
+
+## Python analysis
+Works with benchmark plain text files with the structure:
+```
+# Test name 1
+123
+122
+120
+# Test name 2
+260
+257
+# Test name 3
+112
+```
+The next features will be:
+ * comparing benchmarks, order from best to worst and produce a relevant plot
+ * plot the improvements from the baseline
